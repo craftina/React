@@ -1,3 +1,5 @@
+import {useState, } from 'react';
+
 import Header from "./components/Header.js";
 import Welcome from "./components/Welcome.js";
 import Login from "./components/Login.js";
@@ -9,29 +11,32 @@ import Catalog from "./components/Catalog.js";
 
 
 function App() {
+  const [page, setPage] = useState('/home');
+
   const routes = {
-    '/home' : Welcome, 
-    '/catalog' : Catalog, 
-    '/login' : Login,
-    '/register' : Register, 
-    '/logout' : Welcome
+    '/home' :  <Welcome />, 
+    '/catalog' : <Catalog />, 
+    '/login' : <Login />,
+    '/register' : <Register />, 
+    '/logout' :  <Welcome />,
+    '/create' :  <Create />
   }
+
+const navChangeHandler = (path) => {
+  setPage(path); 
+}
 
   return (
     <div>
       
     <div id="box">
 
-        <Header />
-        <Welcome />
-        <Login />
-        <Register />
-        <Create />
-        <Edit />
-        <Details />
-        <Catalog />
+        <Header 
+        navChangeHandler={navChangeHandler}
+        />
 
         <main id="main-content">
+          {routes[page]  || <h2>No page found!</h2>}
         </main>
 
         
