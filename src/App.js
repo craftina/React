@@ -9,6 +9,14 @@ import Catalog from "./components/Catalog.js";
 
 
 function App() {
+  const routes = {
+    '/home' : Welcome, 
+    '/catalog' : Catalog, 
+    '/login' : Login,
+    '/register' : Register, 
+    '/logout' : Welcome
+  }
+
   return (
     <div>
       

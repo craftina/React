@@ -29,7 +29,7 @@ const Catalog = () =>{
                 </div>
             </div>
 
-            <h3 class="no-articles">No articles yet</h3>
+            <h3 className="no-articles">No articles yet</h3>
         </section>
     );
 }
