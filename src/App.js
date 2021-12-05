@@ -7,7 +7,7 @@ import Register from "./components/Register.js";
 import Create from "./components/Create.js";
 import Edit from "./components/Edit.js";
 import Details from "./components/Details.js";
-import Catalog from "./components/Catalog.js";
+import Catalog from "./components/GameCatalog/Catalog.js";
 import ErrorPage from "./components/ErrorPage.js";
 
 
