@@ -8,6 +8,7 @@ import Create from "./components/Create.js";
 import Edit from "./components/Edit.js";
 import Details from "./components/Details.js";
 import Catalog from "./components/Catalog.js";
+import ErrorPage from "./components/ErrorPage.js";
 
 
 function App() {
@@ -18,7 +19,6 @@ function App() {
     '/catalog' : <Catalog />, 
     '/login' : <Login />,
     '/register' : <Register />, 
-    '/logout' :  <Welcome />,
     '/create' :  <Create />
   }
 
@@ -36,7 +36,7 @@ const navChangeHandler = (path) => {
         />
 
         <main id="main-content">
-          {routes[page]  || <h2>No page found!</h2>}
+          {routes[page]  || <ErrorPage />}
         </main>
 
         
