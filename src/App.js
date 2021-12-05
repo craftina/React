@@ -14,17 +14,29 @@ import ErrorPage from "./components/ErrorPage.js";
 function App() {
   const [page, setPage] = useState('/home');
 
-  const routes = {
-    '/home' :  <Welcome />, 
-    '/catalog' : <Catalog />, 
-    '/login' : <Login />,
-    '/register' : <Register />, 
-    '/create' :  <Create />
+  
+  const navChangeHandler = (path) => {
+    setPage(path); 
+  }
+  
+
+  const router = (path) => {
+    let pathNames = path.split('/');
+    let rootPath = pathNames[1];
+    let argument = pathNames[2];
+
+    const routes = {
+      'home' :  <Welcome />, 
+      'catalog' : <Catalog navChangeHandler={navChangeHandler}/>, 
+      'login' : <Login />,
+      'register' : <Register />, 
+      'create' :  <Create />,
+      'details': <Details id={argument} />
+    }
+    return routes[rootPath];
+
   }
 
-const navChangeHandler = (path) => {
-  setPage(path); 
-}
 
   return (
     <div>
@@ -36,7 +48,7 @@ const navChangeHandler = (path) => {
         />
 
         <main id="main-content">
-          {routes[page]  || <ErrorPage />}
+          {router(page)  || <ErrorPage />}
         </main>
 
         
