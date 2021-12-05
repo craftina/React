@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
 import GameCard from "./GameCard";
+import * as gameServices from "../../services/gameServices"
 
 const Catalog = () => {
     const [games, setGames] = useState([]);
+    const [loading, setLoading] = useState(false);
 
 
     useEffect(() => {
-        fetch('http://localhost:3030/data/games?sortBy=_createdOn%20desc')
-            .then(res => res.json())
+        setLoading(true);
+        gameServices.getAll()
             .then(result => {
                 setGames(result)
+                setLoading(false);
             })
 
     }, [])
@@ -19,7 +22,12 @@ const Catalog = () => {
         <section id="catalog-page">
             <h1>All Games</h1>
 
-            {games.map(g => <GameCard game={g} />)}
+            {loading
+                ? <h1>Loading...</h1>
+                : games.length > 0
+                    ? games.map(g => <GameCard key={g._id} game={g} />)
+                    : <h3 className="no-articles">No games yet</h3>
+            }
 
             <h3 className="no-articles">No games yet</h3>
         </section>
