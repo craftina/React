@@ -26,7 +26,7 @@ function App() {
     let argument = pathNames[2];
 
     const routes = {
-      'home' :  <Welcome />, 
+      'home' :  <Welcome navChangeHandler={navChangeHandler} />, 
       'catalog' : <Catalog navChangeHandler={navChangeHandler}/>, 
       'login' : <Login />,
       'register' : <Register />, 
