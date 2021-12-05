@@ -1,4 +1,5 @@
-import {useState, } from 'react';
+import { useState, } from 'react';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 import Header from "./components/Header.js";
 import Welcome from "./components/Welcome.js";
@@ -12,47 +13,34 @@ import ErrorPage from "./components/ErrorPage.js";
 
 
 function App() {
-  const [page, setPage] = useState('/home');
-
-  
-  const navChangeHandler = (path) => {
-    setPage(path); 
-  }
-  
-
-  const router = (path) => {
-    let pathNames = path.split('/');
-    let rootPath = pathNames[1];
-    let argument = pathNames[2];
-
-    const routes = {
-      'home' :  <Welcome navChangeHandler={navChangeHandler} />, 
-      'catalog' : <Catalog navChangeHandler={navChangeHandler}/>, 
-      'login' : <Login />,
-      'register' : <Register />, 
-      'create' :  <Create />,
-      'details': <Details id={argument} />
-    }
-    return routes[rootPath];
-
-  }
-
 
   return (
     <div>
-      
-    <div id="box">
 
-        <Header 
-        navChangeHandler={navChangeHandler}
-        />
+      <div id="box">
+
+        <Header />
 
         <main id="main-content">
-          {router(page)  || <ErrorPage />}
+          <Switch>
+            <Route path="/" exact component={Welcome} />
+            <Route path="/catalog" component={Catalog} />
+            <Route path="/create" component={Create} />
+            <Route path="/login" component={Login} />
+            <Route path="/register" component={Register} />
+            <Route path="/details/:gameId" component={Details} />
+            <Route path="/custom">
+              <h1>Custom Page</h1>
+            </Route>
+            <Route path="/logout" render={() => {
+              return <Redirect to="/" />
+            }}
+            />
+          </Switch>
         </main>
 
-        
-    </div>
+
+      </div>
 
     </div>
   );
